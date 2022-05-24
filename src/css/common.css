@@ -20,8 +20,12 @@ img {
 
 .timer {
   display: flex;
+  font-weight: bold;
+  font-size: medium;
+  text-shadow: 1px 2px 2px rgb(134, 84, 84), 0 0 1em rgb(129, 129, 175), 0 0 1em rgb(102, 102, 114);
 }
 
 .field {
 margin-right: 10px;
+
 }
