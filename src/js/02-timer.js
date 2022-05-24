@@ -10,8 +10,10 @@ const refs = {
   startBtn: document.querySelector('[data-start]'),
   input: document.querySelector('input#datetime-picker'),
 };
-console.log(refs.input);
+
 let intervalId = null;
+
+refs.startBtn.addEventListener('click', onBtnStartClick);
 
 const options = {
   enableTime: true,
@@ -42,31 +44,35 @@ function onBtnStartClick() {
     }
     const convertedTimerValue = convertMs(delta);
     updateTimerValue(convertedTimerValue);
-    startBtn.disabled = true;
+    refs.startBtn.disabled = true;
   }, 1000);
 }
 
 function convertMs(ms) {
-  // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
 
-  // Remaining days
+
   const days = Math.floor(ms / day);
-  // Remaining hours
   const hours = Math.floor((ms % day) / hour);
-  // Remaining minutes
   const minutes = Math.floor(((ms % day) % hour) / minute);
-  // Remaining seconds
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
 }
 
-refs.start.addEventListener('click', onBtnStartClick);
+function addLeadingZero(value) {
+  return String(value).padStart(2, '0');
+};
 
+function updateTimerValue(config) {
+  refs.days.textContent = addLeadingZero(config.days);
+  refs.hours.textContent = addLeadingZero(config.hours);
+  refs.minutes.textContent = addLeadingZero(config.minutes);
+  refs.seconds.textContent = addLeadingZero(config.seconds);
+}
 // console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
 // console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
 // console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
