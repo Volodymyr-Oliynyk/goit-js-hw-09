@@ -27,6 +27,7 @@ const options = {
       return Notiflix.Notify.warning('Please choose a date in the future');
     } else {
       refs.startBtn.disabled = false;
+      clearInterval(intervalId);
     }
   },
 };
@@ -54,7 +55,6 @@ function convertMs(ms) {
   const hour = minute * 60;
   const day = hour * 24;
 
-
   const days = Math.floor(ms / day);
   const hours = Math.floor((ms % day) / hour);
   const minutes = Math.floor(((ms % day) % hour) / minute);
@@ -65,7 +65,7 @@ function convertMs(ms) {
 
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
-};
+}
 
 function updateTimerValue(config) {
   refs.days.textContent = addLeadingZero(config.days);

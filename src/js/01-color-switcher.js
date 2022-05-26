@@ -12,10 +12,12 @@ startBtn.addEventListener('click', () => {
     // console.log('color change');
   }, 1000);
   startBtn.disabled = true;
+  stopBtn.disabled = false;
 
 });
 
 stopBtn.addEventListener('click', () => {
     clearInterval(timerId);
     startBtn.disabled = false;
+    stopBtn.disabled = true;
 });
